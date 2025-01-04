@@ -1,0 +1,111 @@
+
+class Empleado:
+    def __init__(self, nombre, id_empleado, puesto):
+        self.nombre = nombre
+        self.id_empleado = id_empleado
+        self.puesto = puesto
+
+    def mostrar_info(self):
+        return f"{self.nombre} - {self.puesto} (ID: {self.id_empleado})"
+
+class Empresa:
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.empleados = []
+
+    def agregar_empleado(self, empleado):
+        self.empleados.append(empleado)
+
+    def buscar_empleado(self, id_empleado):
+        for empleado in self.empleados:
+            if empleado.id_empleado == id_empleado:
+                return empleado
+        return None
+
+    def mostrar_empleados(self):
+        for empleado in self.empleados:
+            print(empleado.mostrar_info())
+
+
+mi_empresa = Empresa("Soluciones Textiles")
+
+empleado1 = Empleado("Jessica Zambrano", 2398755874, "Administrativa")
+empleado2 = Empleado("Andres Coronel", 1475895478, "Bodeguero")
+
+mi_empresa.agregar_empleado(empleado1)
+mi_empresa.agregar_empleado(empleado2)
+
+print("Empleados disponibles:")
+mi_empresa.mostrar_empleados()
+
+id_buscado = int(input("Introduce el ID del empleado que deseas buscar: "))
+empleado_buscado = mi_empresa.buscar_empleado(id_buscado)
+
+if empleado_buscado:
+    print("Información del empleado seleccionado:")
+    print(empleado_buscado.mostrar_info())
+else:
+    print("ID SIN INFORMACION")
+
+
+
+# EJERCICIO 2
+
+class Producto:
+    def __init__(self, nombre, precio, stock):
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def actualizar_cantidad(self, stock):
+        self.stock += stock
+
+    def mostrar_info(self):
+        return f"{self.nombre} - Precio: ${self.precio} - Stock: {self.stock}"
+
+class Inventario:
+    def __init__(self):
+        self.productos = []
+
+    def agregar_producto(self, producto):
+        self.productos.append(producto)
+
+    def buscar_producto(self, nombre):
+        nombre = nombre.lower()  # Convertir el nombre buscado a minúsculas
+        for producto in self.productos:
+            if producto.nombre.lower() == nombre:  # Convertir el nombre del producto a minúsculas
+                return producto
+        return None
+
+    def mostrar_productos(self):
+        for producto in self.productos:
+            print(producto.mostrar_info())
+
+# Crear un inventario
+mi_inventario = Inventario()
+
+# Crear productos
+producto1 = Producto("Laptop", 1000, 10)
+producto2 = Producto("Mouse", 10, 50)
+producto3 = Producto("Teclado", 20, 30)
+producto4 = Producto("Monitor Gamer", 400, 15)
+
+# Agregar productos al inventario
+mi_inventario.agregar_producto(producto1)
+mi_inventario.agregar_producto(producto2)
+mi_inventario.agregar_producto(producto3)
+mi_inventario.agregar_producto(producto4)
+
+# Mostrar todos los productos
+print("Productos disponibles:")
+mi_inventario.mostrar_productos()
+
+# Solicitar al usuario que seleccione un producto por nombre
+nombre_buscado = input("Introduce el nombre del producto que deseas buscar: ")
+producto_buscado = mi_inventario.buscar_producto(nombre_buscado)
+
+if producto_buscado:
+    print("Información del producto seleccionado:")
+    print(producto_buscado.mostrar_info())
+else:
+    print("Producto no encontrado")
